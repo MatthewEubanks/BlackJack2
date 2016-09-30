@@ -31,40 +31,59 @@ public class BlackJack {
         int plyrTotal = plyrDrw1 + plyrDrw2;
         System.out.println("Your total is " + plyrTotal + ".");
 
-        System.out.println("The dealer has " + dlrDrw1 + " showing, and a hidden card.");
+        System.out.println("\nThe dealer has " + dlrDrw1 + " showing, and a hidden card.");
         int dlrTotal = dlrDrw1 + dlrDrw2;
         System.out.println("His total is hidden, too.");
+        System.out.print("\nWould you like to \"hit\" or \"stay\"? ");
+        String playerChoice = input.next();
 
-        while (plyrTotal <= 21) {
-            System.out.print("Would you like to \"hit\" or \"stay\"? ");
-            String plyrChoice = input.nextLine();
-            if (plyrChoice.equalsIgnoreCase("hit")) {
-                int hit = (r.nextInt(10) + 1);
-                System.out.println("You drew a " + hit);
-                plyrTotal = plyrTotal + hit;
-                System.out.println("Your total is " + plyrTotal);
-            } else {
-                System.out.println("Okay, dealers turn.");
-                System.out.println("His hidden card was a " + dlrDrw2 + ".");
-                System.out.println("His total was " + dlrTotal + ".");
-                while (dlrTotal <= 16) {
-                    System.out.println("Dealer Chooses to hit.");
-                    int dlrHit = (r.nextInt(10) + 1);
-                    System.out.println("He draws a " + dlrHit + ".");
-                    dlrTotal = dlrTotal + dlrHit;
-                    System.out.println("His total is " + dlrTotal + ".");
-                    if (dlrTotal > 21){
-                        System.out.println("The dealer busted.");
-                    }
-                }
-                
+        while (playerChoice.equalsIgnoreCase("hit")) {
+
+            int hit = (r.nextInt(10) + 1);
+            System.out.println("You drew a " + hit);
+            plyrTotal = plyrTotal + hit;
+            System.out.println("Your total is " + plyrTotal);
+            System.out.print("\nWould you like to \"hit\" or \"stay\"? ");
+            playerChoice = input.next();
+
+        }
+
+        if (plyrTotal > 21) {
+            System.out.println("You Busted.");
+            System.out.println("The Dealer wins!");
+
+        } else if (plyrTotal <= 21) {
+            System.out.println("\nOkay, dealers turn.");
+            System.out.println("His hidden card was a " + dlrDrw2 + ".");
+            System.out.println("His total was " + dlrTotal + ".");
+
+            while (dlrTotal <= 16) {
+                System.out.println("\nDealer Chooses to hit.");
+                int dlrHit = (r.nextInt(10) + 1);
+                System.out.println("He draws a " + dlrHit + ".");
+                dlrTotal = dlrTotal + dlrHit;
+                System.out.println("His total is " + dlrTotal + ".");
+            }
+            System.out.println("\nDealer Stays.\n");
+            if (dlrTotal > 21) {
+                System.out.println("Dealer total is " + dlrTotal + ".");
+                System.out.println("Your total is " + plyrTotal + ".");
+                System.out.println("\nThe dealer busted.");
+            } else if (dlrTotal > plyrTotal) {
+                System.out.println("Dealer total is " + dlrTotal + ".");
+                System.out.println("Your total is " + plyrTotal + ".");
+                System.out.println("\nThe dealer Wins.");
+            } else if (dlrTotal < plyrTotal) {
+                System.out.println("Dealer total is " + dlrTotal + ".");
+                System.out.println("Your total is " + plyrTotal + ".");
+                System.out.println("\nYOU WIN!");
+            } else if (dlrTotal == plyrTotal) {
+                System.out.println("Dealer total is " + dlrTotal + ".");
+                System.out.println("Your total is " + plyrTotal + ".");
+                System.out.println("\nIT'S A TIE! The Dealer Wins!");
             }
         }
-        System.out.println("You Lose.");
-       
 
-        System.out.println("Dealer total is " + dlrTotal + ".");
-        System.out.println("Your total is " + plyrTotal + ".");
     }
 
 }
