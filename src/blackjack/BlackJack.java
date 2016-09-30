@@ -37,19 +37,22 @@ public class BlackJack {
         System.out.print("\nWould you like to \"hit\" or \"stay\"? ");
         String playerChoice = input.next();
 
-        while (playerChoice.equalsIgnoreCase("hit")) {
+        while (playerChoice.equalsIgnoreCase("hit") && plyrTotal <= 21) {
 
             int hit = (r.nextInt(10) + 1);
             System.out.println("You drew a " + hit);
             plyrTotal = plyrTotal + hit;
             System.out.println("Your total is " + plyrTotal);
-            System.out.print("\nWould you like to \"hit\" or \"stay\"? ");
-            playerChoice = input.next();
+            if (plyrTotal > 21) {
+                System.out.println("You Busted.");
+            } else if (plyrTotal <= 21) {
+                System.out.print("\nWould you like to \"hit\" or \"stay\"? ");
+                playerChoice = input.next();
+            }
 
         }
 
         if (plyrTotal > 21) {
-            System.out.println("You Busted.");
             System.out.println("The Dealer wins!");
 
         } else if (plyrTotal <= 21) {
